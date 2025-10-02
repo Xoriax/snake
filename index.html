@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Snake</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Snake</h1>
+
+      <!-- MENU -->
+      <div id="menu">
+        <div class="row">
+          <label for="mode">Mode :</label>
+          <select id="mode">
+            <option value="classic">Classic</option>
+            <option value="time">Time Attack (60s)</option>
+            <option value="zen">Zen Wrap</option>
+            <option value="hardcore">Hardcore</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="grid">Grille :</label>
+          <select id="grid">
+            <option value="16">16 × 16</option>
+            <option value="20">20 × 20</option>
+            <option value="24" selected>24 × 24</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label class="chk"
+            ><input type="checkbox" id="daily-seed" /> Daily Challenge</label
+          >
+          <label class="chk"
+            ><input type="checkbox" id="portals" checked /> Portails</label
+          >
+          <label class="chk"
+            ><input type="checkbox" id="dash" checked /> Dash (F)</label
+          >
+          <label class="chk"
+            ><input type="checkbox" id="particles" checked /> Particules</label
+          >
+          <label class="chk"
+            ><input type="checkbox" id="shrink" /> Shrinking Arena</label
+          >
+        </div>
+
+        <div class="row">
+          <label class="chk"
+            ><input type="checkbox" id="magnet" checked /> Power-up
+            Magnet</label
+          >
+          <label class="chk"
+            ><input type="checkbox" id="mirror" checked /> Power-up
+            Mirror</label
+          >
+        </div>
+
+        <div class="row">
+          <label for="dash-cd">Cooldown Dash (s) :</label>
+          <select id="dash-cd">
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+
+        <!-- Audio controls -->
+        <div class="row audio">
+          <label class="chk"><input type="checkbox" id="mute" /> 🔇 Mute</label>
+          <label
+            >🔊 Volume
+            <input
+              type="range"
+              id="volume"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.6"
+            />
+          </label>
+        </div>
+
+        <button id="play-btn">▶️ Jouer</button>
+        <div class="tips">
+          ZQSD · Espace: pause · R: rejouer · M: menu · T: thème · W: wrap · O:
+          obstacles · F: dash
+        </div>
+      </div>
+
+      <!-- CANVAS -->
+      <canvas
+        id="game"
+        width="512"
+        height="512"
+        aria-label="Jeu Snake"
+        style="display: none"
+      ></canvas>
+
+      <!-- BOUTONS FIN DE PARTIE -->
+      <div id="postgame" class="postgame">
+        <button id="replay-btn">↻ Rejouer</button>
+        <button id="home-btn">🏠 Accueil</button>
+      </div>
+
+      <!-- HUD -->
+      <div class="hud" style="display: none">
+        <div>Mode : <span id="mode-name">Classic</span></div>
+        <div>Score : <span id="score">0</span></div>
+        <div>Meilleur : <span id="best">0</span></div>
+        <div>Vitesse : <span id="speed">1.0x</span></div>
+        <div>Wrap : <span id="wrap-flag">OFF</span></div>
+        <div>Obstacles : <span id="obs-flag">OFF</span></div>
+        <div>Combo : <span id="combo">x1</span></div>
+        <div id="timer-box" style="display: none">
+          ⏱️ <span id="timer">60.0</span>s
+        </div>
+        <div id="dash-box" style="display: none">
+          ⚡ Dash: <span id="dash-ready">OK</span>
+        </div>
+      </div>
+
+      <!-- BADGES -->
+      <div class="badges" style="display: none">
+        <span id="badge-slow" class="badge" style="display: none">⏳ Slow</span>
+        <span id="badge-ghost" class="badge" style="display: none"
+          >👻 Ghost</span
+        >
+        <span id="badge-x2" class="badge" style="display: none">✖️2 Score</span>
+        <span id="badge-portals" class="badge" style="display: none"
+          >🌀 Portails</span
+        >
+        <span id="badge-mirror" class="badge" style="display: none"
+          >⇄ Mirror</span
+        >
+        <span id="badge-magnet" class="badge" style="display: none"
+          >🧲 Magnet</span
+        >
+      </div>
+
+      <p class="help" style="display: none">
+        ZQSD/Flèches · Espace: pause · R: rejouer · M: menu · T: thème · W: wrap
+        · O: obstacles · F: dash
+      </p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
