@@ -6,6 +6,13 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.1.1] - 2025-10-03
+### Corrigé
+- 🪞 Mirror: correction d’un 180° involontaire (filtrage après inversion)
+- 🐍 (Optionnel) Entrée sur l’ancienne case de queue autorisée si on ne mange pas, pour éviter des morts injustes
+
+---
+
 ## [1.1.0] - 2025-10-03
 ### Modifié
 - 🔧 Restructuration complète en architecture modulaire (ECS-lite)
