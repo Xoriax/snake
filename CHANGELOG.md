@@ -6,6 +6,12 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.1.2] - 2025-10-03
+### Modifié
+- Écran de fin : masque l’affichage du score/meilleur et affiche uniquement les boutons **Rejouer** / **Accueil** au centre du plateau.
+
+---
+
 ## [1.1.1] - 2025-10-03
 ### Corrigé
 - 🪞 Mirror: correction d’un 180° involontaire (filtrage après inversion)
