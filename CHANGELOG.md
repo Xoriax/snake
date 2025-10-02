@@ -6,6 +6,19 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.2.0] - 2025-10-03
+### Ajouté
+- 🖼️ Refonte complète de la page d’accueil (design néon, glassmorphism)
+- 🧩 Organisation en panneaux : Session, Gameplay, Power-ups, Audio
+- 🧲 Switches custom, sélecteurs et slider stylés
+- ▶️ Nouveau bouton **JOUER** (CTA) avec glow
+
+### Modifié
+- Mise en page responsive : grille 4 colonnes → 2 → 1 selon la largeur
+- Harmonisation typographique et couleurs
+
+---
+
 ## [1.1.2] - 2025-10-03
 ### Modifié
 - Écran de fin : masque l’affichage du score/meilleur et affiche uniquement les boutons **Rejouer** / **Accueil** au centre du plateau.
