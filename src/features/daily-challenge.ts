@@ -1,0 +1,1 @@
+export { todaySeed } from "../core/rng";

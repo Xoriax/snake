@@ -1,5 +1,9 @@
 export type Dir = "up" | "down" | "left" | "right";
 
+/**
+ * Gestion des entrées clavier (ZQSD + flèches).
+ * Empêche les demi-tours instantanés et bufferise quelques entrées.
+ */
 export class Input {
     private queue: Dir[] = [];
     private lastAppliedDir: Dir = "right";
@@ -8,7 +12,7 @@ export class Input {
         window.addEventListener("keydown", (e) => {
             const k = e.key.toLowerCase();
 
-            // Empêche scroll (espace / flèches)
+            // Empêche scroll sur espace / flèches
             if ([" ", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(k)) {
                 e.preventDefault();
             }
@@ -19,7 +23,7 @@ export class Input {
             if (k === "q") this.pushDir("left");
             if (k === "d") this.pushDir("right");
 
-            // Bonus: flèches
+            // Flèches
             if (k === "arrowup") this.pushDir("up");
             if (k === "arrowdown") this.pushDir("down");
             if (k === "arrowleft") this.pushDir("left");
@@ -28,10 +32,14 @@ export class Input {
     }
 
     private pushDir(d: Dir) {
-        if (this.queue.length < 3) this.queue.push(d); // petit buffer
+        // On stocke jusqu’à 3 directions max pour fluidifier le jeu
+        if (this.queue.length < 3) this.queue.push(d);
     }
 
-    /** Une seule direction max par tick, pas de demi-tour */
+    /**
+     * Retourne une direction valide à appliquer ce tick.
+     * Empêche les demi-tours instantanés.
+     */
     popDirection(current: Dir): Dir {
         while (this.queue.length > 0) {
             const d = this.queue.shift()!;
@@ -49,6 +57,7 @@ export class Input {
         return current;
     }
 
+    /** Réinitialise l’entrée (utile lors des resets/rejouer) */
     reset(startDir: Dir = "right") {
         this.queue = [];
         this.lastAppliedDir = startDir;

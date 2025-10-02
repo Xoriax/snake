@@ -6,6 +6,18 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.1.0] - 2025-10-03
+### Modifié
+- 🔧 Restructuration complète en architecture modulaire (ECS-lite)
+  - Séparation en `app/`, `core/`, `systems/`, `rendering/`, `ui/`, `audio/`, `features/`, `styles/`
+  - Logiques isolées : mouvement, collisions, powerups, dash, portails, shrink, etc.
+  - Code plus lisible et maintenable
+
+### Ajouté
+- 🧩 Mise à jour du README avec la section **Architecture**
+
+---
+
 ## [1.0.0] - 2025-10-02
 
 ### Ajouté
