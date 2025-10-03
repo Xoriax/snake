@@ -8,7 +8,7 @@ import type { Dir } from "../core/types";
 import { applyDirection } from "../systems/movement.system";
 import { tickTimeAttack } from "../systems/timeattack.system";
 import { tickPowerTimers } from "../systems/powerup.system";
-import { tickPortalPhase, ensureInitialPortals } from "../systems/portal.spawn.system";
+import { tickPortalPhase, ensureInitialPortals, tickPortalCycle } from "../systems/portal.spawn.system";
 
 import { tickCombo } from "../systems/combo.system";
 import { tickDash, tryDash } from "../systems/dash.system";
@@ -77,6 +77,7 @@ function loop(now: number) {
     tickTimeAttack(state, dt);
     tickPowerTimers(state, dt);
     tickPortalPhase(state, dt);
+    tickPortalCycle(state, dt);
     tickCombo(state, dt);
     tickDash(state, dt);
     tickShrink(state, dt);
