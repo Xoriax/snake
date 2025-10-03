@@ -6,8 +6,13 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [1.2.1] - 2025-10-03
+## [1.2.2] - 2025-10-03
+### Modifié
+- Le screen shake est désormais **uniquement** déclenché à la mort (plus de shake pendant le dash).
 
+---
+
+## [1.2.1] - 2025-10-03
 ### Corrigé
 - Portails: une paire est désormais générée au démarrage quand l'option est activée.
 - Recréation possible après avoir mangé s'il n'y a pas de portails à l'écran.
