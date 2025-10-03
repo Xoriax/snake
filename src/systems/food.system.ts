@@ -1,5 +1,6 @@
 import type { GameState } from "../core/state";
 import { random, randomFreeCell } from "../core/state";
+import { maybeRespawnPortals } from "./portal.spawn.system";
 
 export function maybeMagnetFood(s: GameState) {
     if (s.power?.type !== "magnet") return;
@@ -7,9 +8,12 @@ export function maybeMagnetFood(s: GameState) {
     const dx = Math.sign(head.x - s.food.x);
     const dy = Math.sign(head.y - s.food.y);
     let nx = s.food.x, ny = s.food.y;
-    if (Math.abs(head.x - s.food.x) >= Math.abs(head.y - s.food.y)) nx += dx; else ny += dy;
+    if (Math.abs(head.x - s.food.x) >= Math.abs(head.y - s.food.y)) nx += dx;
+    else ny += dy;
 
-    const blocked = s.snake.some(c => c.x === nx && c.y === ny) || (s.obstaclesEnabled && s.obstacles.some(o => o.x === nx && o.y === ny));
+    const blocked =
+        s.snake.some(c => c.x === nx && c.y === ny) ||
+        (s.obstaclesEnabled && s.obstacles.some(o => o.x === nx && o.y === ny));
     if (!blocked) { s.food.x = nx; s.food.y = ny; }
 }
 
@@ -25,10 +29,9 @@ export function onEat(s: GameState, hx: number, hy: number) {
 
     s.food = randomFreeCell(s);
     if (s.obstaclesEnabled && random(s) < 0.25) s.obstacles.push(randomFreeCell(s));
-    if (s.portalsEnabled && random(s) < 0.35) {
-        // handled by portal.spawn.system
-        s.portalPhase = s.portalPhase; // noop, signal léger
-    }
+
+    // ⬇️ nouvelle ligne : si pas de portails à l’écran, on tente d’en créer
+    maybeRespawnPortals(s);
 
     // particules
     s.particles.push(...spawnParticles(s, hx, hy, "#ff5b6e"));

@@ -8,7 +8,8 @@ import type { Dir } from "../core/types";
 import { applyDirection } from "../systems/movement.system";
 import { tickTimeAttack } from "../systems/timeattack.system";
 import { tickPowerTimers } from "../systems/powerup.system";
-import { tickPortalPhase, maybeRespawnPortals } from "../systems/portal.spawn.system";
+import { tickPortalPhase, ensureInitialPortals } from "../systems/portal.spawn.system";
+
 import { tickCombo } from "../systems/combo.system";
 import { tickDash, tryDash } from "../systems/dash.system";
 import { tickShrink } from "../systems/shrink.system";
@@ -61,6 +62,7 @@ function start() {
     showGameUI();
     last = performance.now();
     requestAnimationFrame(loop);
+    ensureInitialPortals(state);
 }
 
 function loop(now: number) {
