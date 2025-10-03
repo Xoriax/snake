@@ -15,32 +15,45 @@ export function stepOnce(s: GameState) {
 
     // Murs / wrap
     const r = checkWallsOrWrap(s, nx, ny);
-    if (r.dead) { s.alive = false; s.events.emit({ type: "die" }); return; }
+    if (r.dead) {
+        s.alive = false;
+        s.shakeMs = Math.max(s.shakeMs, 300);   // ⬅️ shake à la mort
+        s.events.emit({ type: "die" });
+        return;
+    }
     nx = r.nx; ny = r.ny;
 
     // Portail
     const tele = portalTeleportIfNeeded(s, nx, ny);
     nx = tele.x; ny = tele.y;
 
-    // Self/obstacles : autoriser la case de la queue si on NE MANGE PAS
+    // Autoriser d’entrer sur l’ancienne queue si on ne mange pas
     const tail = s.snake[0];
     const eating = (s.food.x === nx && s.food.y === ny);
     const movingIntoTail = (!eating && tail.x === nx && tail.y === ny);
 
-    // obstacle ?
+    // Obstacle ?
     const hitObstacle = s.obstaclesEnabled && s.obstacles.some(o => o.x === nx && o.y === ny);
-    if (hitObstacle) { s.alive = false; s.events.emit({ type: "die" }); return; }
+    if (hitObstacle) {
+        s.alive = false;
+        s.shakeMs = Math.max(s.shakeMs, 300);   // ⬅️ shake à la mort
+        s.events.emit({ type: "die" });
+        return;
+    }
 
-    // self ?
+    // Self ?
     const hitSelf = s.snake.some(c => c.x === nx && c.y === ny);
     if (hitSelf && !movingIntoTail && s.power?.type !== "ghost") {
-        s.alive = false; s.events.emit({ type: "die" }); return;
+        s.alive = false;
+        s.shakeMs = Math.max(s.shakeMs, 300);   // ⬅️ shake à la mort
+        s.events.emit({ type: "die" });
+        return;
     }
 
     // Avancer
     s.snake.push({ x: nx, y: ny });
 
-    // Power-up ramassé ?
+    // Power-up
     tryPickPower(s, nx, ny);
 
     // Manger ?
@@ -48,7 +61,6 @@ export function stepOnce(s: GameState) {
         onEat(s, nx, ny);
         s.events.emit({ type: "eat", x: nx, y: ny });
     } else {
-        // pas mangé → la queue part
         s.snake.shift();
     }
 }
