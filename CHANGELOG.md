@@ -6,6 +6,14 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.2.1] - 2025-10-03
+
+### Corrigé
+- Portails: une paire est désormais générée au démarrage quand l'option est activée.
+- Recréation possible après avoir mangé s'il n'y a pas de portails à l'écran.
+
+---
+
 ## [1.2.0] - 2025-10-03
 ### Ajouté
 - 🖼️ Refonte complète de la page d’accueil (design néon, glassmorphism)
