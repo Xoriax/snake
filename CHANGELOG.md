@@ -6,6 +6,13 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.3.0] - 2025-10-03
+### Ajouté
+- 🌀 Portails dynamiques : la paire se **déplace automatiquement toutes les 3 secondes**.
+- L'option *Portails* garantit une paire au démarrage.\n\n
+
+---
+
 ## [1.2.2] - 2025-10-03
 ### Modifié
 - Le screen shake est désormais **uniquement** déclenché à la mort (plus de shake pendant le dash).
