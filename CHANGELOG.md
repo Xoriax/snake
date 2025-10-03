@@ -6,6 +6,14 @@ et ce projet suit [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.3.1] - 2025-10-03
+### Corrigé
+- Shrinking Arena : activation correcte avec bordure visible.
+- Wrap automatiquement désactivé quand shrink est actif.
+- Nettoyage des entités hors zone (food re-clampée, portails purge, obstacles filtrés).
+
+---
+
 ## [1.3.0] - 2025-10-03
 ### Ajouté
 - 🌀 Portails dynamiques : la paire se **déplace automatiquement toutes les 3 secondes**.
