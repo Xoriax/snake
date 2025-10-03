@@ -2,12 +2,16 @@ import type { GameState } from "../core/state";
 import { inBounds } from "../core/grid";
 
 export function checkWallsOrWrap(s: GameState, nx: number, ny: number) {
-    if (s.wrap) {
+    const inset = s.shrinkEnabled ? s.shrinkInset : 0;
+
+    if (s.wrap && !s.shrinkEnabled) {
         nx = (nx + s.grid) % s.grid;
         ny = (ny + s.grid) % s.grid;
-    } else {
-        const inset = s.shrinkEnabled ? s.shrinkInset : 0;
-        if (!inBounds(nx, ny, s.grid, inset)) return { dead: true, nx, ny };
+        return { dead: false, nx, ny };
+    }
+
+    if (!inBounds(nx, ny, s.grid, inset)) {
+        return { dead: true, nx, ny };
     }
     return { dead: false, nx, ny };
 }
